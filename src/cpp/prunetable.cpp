@@ -702,7 +702,7 @@ void prunetable::writept(const puzdef &pd) {
 #endif
   string filename = makefilename(pd, true /* create_dirs */);
   if (quiet == 0)
-    cout << "Writing " << filename << " " << flush;
+    cout << "Writing " << filename << " " << endl << flush;
   ofstream w;
   // do stuff
   w.open(filename, ios::out | ios::trunc);
@@ -736,7 +736,7 @@ void prunetable::writept(const puzdef &pd) {
   if (w.fail())
     error("! I/O error");
   if (quiet == 0)
-    cout << "written in " << duration() << endl << flush;
+    cout << "Written in " << duration() << endl << flush;
 }
 int prunetable::readpt(const puzdef &pd) {
 #ifdef USECOMPRESSION
