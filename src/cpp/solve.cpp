@@ -72,11 +72,14 @@ int microthread::possibsolution(const puzdef &pd) {
     solutionsfound++;
     lastsolution.clear();
     if (d == 0) // allow null solution to trigger
-      cout << " ";
+      cout << ".";
+    cout << "FOUND SOLUTION: ";
     for (int i = 0; i < d; i++) {
-      cout << " " << pd.moves[movehist[i]].name;
       if (i > 0)
-        lastsolution += " ";
+        cout << ".";
+      cout << pd.moves[movehist[i]].name;
+      if (i > 0)
+        lastsolution += ".";
       lastsolution += pd.moves[movehist[i]].name;
     }
     cout << endl << flush;
@@ -266,7 +269,11 @@ int solve(const puzdef &pd, prunetable &pt, const setval p, generatingset *gs) {
   solutionsfound = 0;
   int hid = 0;
   randomized.clear();
+
+  // Start from initial max depth
   for (int d = initd; d <= maxdepth; d++) {
+
+    // Start with d random states of all possible moves.
     if (randomstart) {
       while ((int)randomized.size() <= d) {
         randomized.push_back({});

@@ -66,8 +66,12 @@ vector<int> shorten(const puzdef &pd, const vector<int> &orig) {
             }
             seq.erase(seq.begin() + i + sol.size(), seq.begin() + i + len);
             cout << "Current length is " << seq.size() << endl;
-            for (int j = 0; j < (int)seq.size(); j++)
-              cout << " " << pd.moves[seq[j]].name;
+            cout << "FOUND SOLUTION: ";
+            for (int j = 0; j < (int)seq.size(); j++) {
+              if (j)
+                cout << ".";
+              cout << pd.moves[seq[j]].name;
+            }
             cout << endl;
             goto again;
           }
@@ -84,9 +88,9 @@ void shortenit(const puzdef &pd, vector<int> &movelist, const char *) {
     auto res = shorten(pd, movelist);
     for (auto mvind : res)
       if (mvind < (int)pd.moves.size())
-        cout << " " << pd.moves[mvind].name;
+        cout << "." << pd.moves[mvind].name;
       else
-        cout << " " << pd.rotations[mvind - pd.moves.size()].name;
+        cout << "." << pd.rotations[mvind - pd.moves.size()].name;
   }
   cout << endl;
 }

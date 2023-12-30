@@ -264,6 +264,10 @@ void calculatesizes(puzdef &pd) {
            << glogstates << endl;
   }
 }
+
+// p is the state to apply the move to
+// pos is the permutation to apply
+// pt is the position to save applying pos to p
 void domove(const puzdef &pd, setval p, setval pos, setval pt) {
   pd.mul(p, pos, pt);
   pd.assignpos(p, pt);

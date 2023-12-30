@@ -64,7 +64,8 @@ vector<string> getline(istream *f, ull &checksum) {
 }
 void expect(const vector<string> &toks, int cnt) {
   if (cnt != (int)toks.size())
-    inerror("! wrong number of tokens on line");
+    inerror("! wrong number of tokens on line. " + to_string(cnt) +
+            " expected, " + to_string(toks.size()) + " found.");
 }
 // must be a number under 256.
 int getnumber(int minval, const string &s) {
@@ -479,8 +480,12 @@ void expandmoveset(const puzdef &pd, vector<moove> &moves,
         string s2 = m.name;
         if (tw != -1)
           s2 += to_string(abs(tw));
-        if (tw < 0)
-          s2 += "'";
+        if (tw < 0) {
+          if (s2[0] == '-')
+            s2 = s2.substr(1);
+          else
+            s2 = "-" + s2;
+        }
         newnames.push_back(s2);
         m2.name = s2;
       }
